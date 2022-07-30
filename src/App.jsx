@@ -3,6 +3,8 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Map from "./components/Map";
+import Header from "./components/Header";
+import SearchForm from "./components/SearchForm";
 
 export default function App() {
   return (
@@ -14,7 +16,9 @@ export default function App() {
       <p className="App-intro">
         To get started, edit <code>src/App.jsx</code> and save to reload.
       </p>
+      <Header id="custom-header" />
       <Map id="map" />
+      <SearchForm id="searchform" />
     </div>
   );
 }
