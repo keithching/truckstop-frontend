@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SearchForm() {
+export default function SearchForm(props) {
   const restaurantList = [
     "--Choose an option--",
     "Arby's",
@@ -46,20 +46,20 @@ export default function SearchForm() {
     "Laundry Facilities",
   ];
 
-  const test = (e) => {
-    console.log(e);
-  };
-
   return (
     <>
       <div>SearchForm</div>
-      <form action="filterLocations">
+      <form action="filterLocations" onSubmit={props.test}>
         <label htmlFor="truck_services" id="truck_services">
           Truck Services:
         </label>
-        <select>
+        <select
+          onChange={(e) => {
+            props.setTruckService(e.target.value);
+          }}
+        >
           {serviceList.map((service) => (
-            <option key={serviceList.indexOf(service)} value={service}>
+            <option key={service} value={serviceList.indexOf(service)}>
               {service}
             </option>
           ))}
@@ -67,9 +67,13 @@ export default function SearchForm() {
         <label htmlFor="amenities" id="amenities">
           Amenities:
         </label>
-        <select>
+        <select
+          onChange={(e) => {
+            props.setAmenity(e.target.value);
+          }}
+        >
           {amenityList.map((amenity) => (
-            <option key={amenityList.indexOf(amenity)} value={amenity}>
+            <option key={amenity} value={amenityList.indexOf(amenity)}>
               {amenity}
             </option>
           ))}
@@ -77,14 +81,19 @@ export default function SearchForm() {
         <label htmlFor="restaurants" id="restaurants">
           Restaurants:
         </label>
-        <select>
+        <select
+          onChange={(e) => {
+            props.setRestaurant(e.target.value);
+          }}
+        >
           {restaurantList.map((rest) => (
-            <option key={restaurantList.indexOf(rest)} value={rest}>
+            // <option key={restaurantList.indexOf(rest)} value={rest}>
+            <option key={rest} value={restaurantList.indexOf(rest)}>
               {rest}
             </option>
           ))}
         </select>
-        <input type="submit" value="Search" onSubmit={test()} />{" "}
+        <input type="submit" value="Search" />
       </form>
     </>
   );
