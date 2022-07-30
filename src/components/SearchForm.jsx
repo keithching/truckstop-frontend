@@ -1,51 +1,7 @@
 import React from "react";
+import { restaurants, services, amenities } from "../testDB.json";
 
 export default function SearchForm(props) {
-  const restaurantList = [
-    "--Choose an option--",
-    "Arby's",
-    "Subway",
-    "McDonald's",
-    "Chester's",
-    "Godfather's Pizza",
-    "IHOP Express",
-    "Hardee's",
-    "FlyingK Subs Burritos",
-    "Baskin Robbins",
-    "Taco Bell",
-    "Carl's Jr.",
-    "FlyingK Subs",
-    "Denny's",
-    "Del Taco",
-    "Wendy's",
-  ];
-
-  const serviceList = [
-    "--Choose an option--",
-    "National Tire Account",
-    "Light Mechanical",
-    "TirePass",
-    "Commercial Truck Oil Change",
-  ];
-
-  const amenityList = [
-    "--Choose an option--",
-    "Private Showers",
-    "CAT Scales",
-    "Wireless Internet",
-    "ATM",
-    "Transflo",
-    "Overnight Parking",
-    "RV Dump",
-    "DEF Bulk Dispensers",
-    "RF Service",
-    "Bulk Propane",
-    "Hotel Nearby",
-    "CNG",
-    "CNG Fast Fill",
-    "Laundry Facilities",
-  ];
-
   return (
     <>
       <div>SearchForm</div>
@@ -58,8 +14,11 @@ export default function SearchForm(props) {
             props.setTruckService(e.target.value);
           }}
         >
-          {serviceList.map((service) => (
-            <option key={service} value={serviceList.indexOf(service)}>
+          <option key={"ServiceDefault"} value="0">
+            --Choose an option--
+          </option>
+          {services.map((service) => (
+            <option key={service} value={services.indexOf(service)}>
               {service}
             </option>
           ))}
@@ -72,8 +31,11 @@ export default function SearchForm(props) {
             props.setAmenity(e.target.value);
           }}
         >
-          {amenityList.map((amenity) => (
-            <option key={amenity} value={amenityList.indexOf(amenity)}>
+          <option key={"AmenDefault"} value="0">
+            --Choose an option--
+          </option>
+          {amenities.map((amenity) => (
+            <option key={amenity} value={amenities.indexOf(amenity)}>
               {amenity}
             </option>
           ))}
@@ -86,9 +48,11 @@ export default function SearchForm(props) {
             props.setRestaurant(e.target.value);
           }}
         >
-          {restaurantList.map((rest) => (
-            // <option key={restaurantList.indexOf(rest)} value={rest}>
-            <option key={rest} value={restaurantList.indexOf(rest)}>
+          <option key={"RestDefault"} value="0">
+            --Choose an option--
+          </option>
+          {restaurants.map((rest) => (
+            <option key={rest} value={restaurants.indexOf(rest)}>
               {rest}
             </option>
           ))}
