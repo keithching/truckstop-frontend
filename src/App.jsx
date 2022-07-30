@@ -12,6 +12,8 @@ export default function App() {
   const [truckService, setTruckService] = useState("");
   const [amenity, setAmenity] = useState("");
 
+  const [searchResult, setSearchResult] = useState();
+
   //USEEFFECTS
 
   //Handlers
@@ -38,6 +40,7 @@ export default function App() {
         setRestaurant={setRestaurant}
         setTruckService={setTruckService}
         setAmenity={setAmenity}
+        setSearchResult={setSearchResult}
         test={test}
       />
     </div>
