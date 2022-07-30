@@ -2,7 +2,7 @@ import React from "react";
 
 import logo from "./logo.svg";
 import "./App.css";
-import Map from "./components/Map";
+//import Map from "./components/Map";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 
@@ -17,7 +17,7 @@ export default function App() {
         To get started, edit <code>src/App.jsx</code> and save to reload.
       </p>
       <Header id="custom-header" />
-      <Map id="map" />
+      {/* <Map id="map" /> */}
       <SearchForm id="searchform" />
     </div>
   );
