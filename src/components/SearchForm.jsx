@@ -54,7 +54,7 @@ export default function SearchForm(props) {
           Truck Services:
         </label>
         <select
-          onChange={(e) => {
+          onBlur={(e) => {
             props.setTruckService(e.target.value);
           }}
         >
@@ -68,7 +68,7 @@ export default function SearchForm(props) {
           Amenities:
         </label>
         <select
-          onChange={(e) => {
+          onBlur={(e) => {
             props.setAmenity(e.target.value);
           }}
         >
@@ -82,7 +82,7 @@ export default function SearchForm(props) {
           Restaurants:
         </label>
         <select
-          onChange={(e) => {
+          onBlur={(e) => {
             props.setRestaurant(e.target.value);
           }}
         >
