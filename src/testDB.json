@@ -1,0 +1,43 @@
+{
+  "restaurants": [
+    "Arby's",
+    "Subway",
+    "McDonald's",
+    "Chester's",
+    "Godfather's Pizza",
+    "IHOP Express",
+    "Hardee's",
+    "FlyingK Subs Burritos",
+    "Baskin Robbins",
+    "Taco Bell",
+    "Carl's Jr.",
+    "FlyingK Subs",
+    "Denny's",
+    "Del Taco",
+    "Wendy's"
+  ],
+
+  "services": [
+    "National Tire Account",
+    "Light Mechanical",
+    "TirePass",
+    "Commercial Truck Oil Change"
+  ],
+
+  "amenities": [
+    "Private Showers",
+    "CAT Scales",
+    "Wireless Internet",
+    "ATM",
+    "Transflo",
+    "Overnight Parking",
+    "RV Dump",
+    "DEF Bulk Dispensers",
+    "RF Service",
+    "Bulk Propane",
+    "Hotel Nearby",
+    "CNG",
+    "CNG Fast Fill",
+    "Laundry Facilities"
+  ]
+}
