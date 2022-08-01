@@ -1,7 +1,9 @@
 import React from "react";
+
 import { restaurants, services, amenities } from "../testDB.json";
 
 export default function SearchForm(props) {
+  //RENDER
   return (
     <>
       <div>SearchForm</div>
@@ -18,7 +20,7 @@ export default function SearchForm(props) {
             --Choose an option--
           </option>
           {services.map((service) => (
-            <option key={service} value={services.indexOf(service)}>
+            <option key={services.indexOf(service)} value={service}>
               {service}
             </option>
           ))}
@@ -35,7 +37,7 @@ export default function SearchForm(props) {
             --Choose an option--
           </option>
           {amenities.map((amenity) => (
-            <option key={amenity} value={amenities.indexOf(amenity)}>
+            <option key={amenities.indexOf(amenity)} value={amenity}>
               {amenity}
             </option>
           ))}
@@ -52,7 +54,7 @@ export default function SearchForm(props) {
             --Choose an option--
           </option>
           {restaurants.map((rest) => (
-            <option key={rest} value={restaurants.indexOf(rest)}>
+            <option key={restaurants.indexOf(rest)} value={rest}>
               {rest}
             </option>
           ))}
