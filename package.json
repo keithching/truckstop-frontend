@@ -13,6 +13,8 @@
     "lint": "eslint --fix --ext .js --ext .jsx ."
   },
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.35",
+    "@react-google-maps/api": "^2.12.1",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -20,6 +22,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
+    "google-maps-react": "^2.0.6",
     "knex": "^0.21.19",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",

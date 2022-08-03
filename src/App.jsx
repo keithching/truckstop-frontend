@@ -18,12 +18,17 @@ export default function App() {
   const [dropDownList, setDropDownList] = useState({});
   // eslint-disable-next-line
   const [allLocations, setAllLocations] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // EFFECT
   useEffect(() => {
     getAllLocations();
     //getDropdownList();
   }, []);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, [allLocations]);
 
   // HANDLER
   const getDropdownList = async () => {
@@ -74,7 +79,7 @@ export default function App() {
         <h2>Welcome to ServiceFINDER</h2>
       </div>
       <Header id="custom-header" />
-      <Map id="map" />
+      {isLoaded ? <Map id="map" allLocations={allLocations} /> : null}
       <SearchForm
         id="searchform"
         setRestaurant={setRestaurant}
