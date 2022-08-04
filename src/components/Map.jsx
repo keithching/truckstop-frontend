@@ -42,7 +42,7 @@ export default function Map(props) {
   return isLoaded ? (
     <GoogleMap
       zoom={4}
-      center={{ lat: 25.7392, lng: -104.9903 }}
+      center={{ lat: 39.5, lng: -98.35 }}
       mapContainerClassName="map-container"
       mapContainerStyle={{ width: "100vw", height: "100vh" }}
     >
