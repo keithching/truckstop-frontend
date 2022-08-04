@@ -80,14 +80,14 @@ export default function App() {
       </div>
       <Header id="custom-header" />
       {isLoaded ? <Map id="map" allLocations={allLocations} /> : null}
-      <SearchForm
+      {/* <SearchForm
         id="searchform"
         setRestaurant={setRestaurant}
         setTruckService={setTruckService}
         setAmenity={setAmenity}
         setSearchResult={setSearchResult}
-        test={test}
-      />
+        // test={test}
+      /> */}
     </div>
   );
 }
