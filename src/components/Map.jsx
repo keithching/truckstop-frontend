@@ -1,7 +1,4 @@
 import React, { useMemo, useState } from "react";
-//import { useSelector, useDispatch } from "react-redux";
-//import { fetchLocations } from "../slices/locationsSlice";
-//import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import {
   GoogleMap,
   useLoadScript,
@@ -9,7 +6,6 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 require("dotenv").config();
-//import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 export default function Map(props) {
   const [activeMarker, setActiveMarker] = useState(null);
@@ -18,34 +14,28 @@ export default function Map(props) {
       return;
     }
     setActiveMarker(id);
-    console.log("Active Maker ID:", id);
   };
 
-  console.log("before isLoaded");
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
   });
 
-  // if (!isLoaded) return <div className="map">Map Loading....</div>;
-  // console.log("isLoaded");
-
   const markers = [];
-  console.log(props);
+
   if (!props.allLocations.data) {
-    console.log(`LOCATION DATA NOT LOADED`);
     return <></>;
   }
   const location = props.allLocations.data;
-  console.log(location);
 
   for (let i = 0; i < location.length; i++) {
     markers.push({
       id: location[i].site_id,
       name: location[i].name,
       position: { lat: location[i].latitude, lng: location[i].longitude },
+      highway: location[i].highway,
+      phone_number: location[i].phone_number,
     });
   }
-  console.log(markers);
 
   if (loadError) return <div> The MAP is Unable to Load </div>;
 
@@ -56,9 +46,7 @@ export default function Map(props) {
       mapContainerClassName="map-container"
       mapContainerStyle={{ width: "100vw", height: "100vh" }}
     >
-      {/* <Marker position={{ lat: 25.7392, lng: -104.9903 }} /> */}
-
-      {markers.map(({ id, name, position }) => (
+      {markers.map(({ id, name, position, highway, phone_number }) => (
         <Marker
           key={id}
           position={position}
@@ -66,7 +54,11 @@ export default function Map(props) {
         >
           {activeMarker === id ? (
             <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>{name}</div>
+              <div>
+                <div id="w_name">{name}</div>
+                <div id="w_highway">{highway}</div>
+                <div id="w_phone_number">{phone_number}</div>
+              </div>
             </InfoWindow>
           ) : null}
         </Marker>
