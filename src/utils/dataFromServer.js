@@ -28,7 +28,7 @@ const getRestaurants = () => {
 };
 
 const getAmenities = () => {
-  return axios.get(`${server}amentities`);
+  return axios.get(`${server}amenities`);
 };
 
 const getGasPrices = () => {

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -9,6 +9,51 @@ require("dotenv").config();
 
 export default function Map(props) {
   const [activeMarker, setActiveMarker] = useState(null);
+  const { locationDetails } = props;
+  const [markers, setMarkers] = useState([]);
+
+  useEffect(() => {
+    if (locationDetails) {
+      // console.log(`🗾🗾🗾🗾🗾🗾${locationDetails}`);
+      if (!props.allLocations) {
+        return <></>;
+      }
+
+      //console.log(props);
+      const location =
+        props.selectedLocations.length < 1
+          ? props.allLocations
+          : props.selectedLocations;
+
+      console.log(location);
+      const temp = [];
+
+      for (let i = 0; i < location.length; i++) {
+        const services = locationDetails.filter((loc) => {
+          return loc.site_id === location[i].site_id;
+        });
+        console.log(
+          `🥲🥲🥲🥲🥲🥲🥲🥲 ${JSON.stringify(services[0].gas_prices)}`
+        );
+        console.log(`🚛GAS SERVICES ${services[0].gasPrices}`);
+
+        temp.push({
+          id: location[i].site_id,
+          name: location[i].name,
+          position: { lat: location[i].latitude, lng: location[i].longitude },
+          highway: location[i].highway,
+          phone_number: location[i].phone_number,
+          services: services[0].truck_services,
+          restaurants: services[0].restaurants,
+          gasPrices: services[0].gas_prices,
+          amenities: services[0].amenities,
+        });
+        console.log({ temp });
+        setMarkers(temp);
+      }
+    }
+  }, [locationDetails]);
+
   const handleActiveMarker = (id) => {
     if (id === activeMarker) {
       return;
@@ -20,28 +65,8 @@ export default function Map(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
   });
 
-  const markers = [];
-
   if (!props.allLocations) {
     return <></>;
-  }
-
-  //console.log(props);
-  const location =
-    props.selectedLocations.length < 1
-      ? props.allLocations
-      : props.selectedLocations;
-
-  //console.log(location);
-
-  for (let i = 0; i < location.length; i++) {
-    markers.push({
-      id: location[i].site_id,
-      name: location[i].name,
-      position: { lat: location[i].latitude, lng: location[i].longitude },
-      highway: location[i].highway,
-      phone_number: location[i].phone_number,
-    });
   }
 
   if (loadError) return <div> The MAP is Unable to Load </div>;
@@ -53,23 +78,57 @@ export default function Map(props) {
       mapContainerClassName="map-container"
       mapContainerStyle={{ width: "100vw", height: "100vh" }}
     >
-      {markers.map(({ id, name, position, highway, phone_number }) => (
-        <Marker
-          key={id}
-          position={position}
-          onClick={() => handleActiveMarker(id)}
-        >
-          {activeMarker === id ? (
-            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-              <div>
-                <div id="w_name">{name}</div>
-                <div id="w_highway">{highway}</div>
-                <div id="w_phone_number">{phone_number}</div>
-              </div>
-            </InfoWindow>
-          ) : null}
-        </Marker>
-      ))}
+      {markers
+        ? markers.map(
+            ({
+              id,
+              name,
+              position,
+              highway,
+              phone_number,
+              services,
+              restaurants,
+              gasPrices,
+              amenities,
+            }) => (
+              <Marker
+                key={id}
+                position={position}
+                onClick={() => handleActiveMarker(id)}
+              >
+                {activeMarker === id ? (
+                  <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                    <div>
+                      <div id="w_name">{name}</div>
+                      <div id="w_highway">{highway}</div>
+                      <div id="w_phone_number">{phone_number}</div>
+                      <div id="w_services">Service: {services}</div>
+                      <div id="w_amenities">Amenities: {amenities}</div>
+                      <div id="w_restaurants">Restaurants: {restaurants}</div>
+                      {/* <div id="w_gasPrices">
+                        Gas Prices: {JSON.stringify(gasPrices)}
+                      </div> */}
+                      <div>
+                        Gas Prices:
+                        {Object.keys(gasPrices).length > 0 ? (
+                          Object.keys(gasPrices).map((gasPrice) => {
+                            return (
+                              <li key={gasPrice}>
+                                {gasPrice}: {gasPrices[gasPrice]}
+                              </li>
+                            );
+                          })
+                        ) : (
+                          <span>N/A</span>
+                        )}
+                      </div>
+                    </div>
+                  </InfoWindow>
+                ) : null}
+              </Marker>
+            )
+          )
+        : null}
     </GoogleMap>
   ) : (
     <></>

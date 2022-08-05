@@ -6,7 +6,10 @@ import Map from "./components/Map";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import { getAllLocations, getSearchItems } from "./utils/dataFromServer";
-import { getByUserLocation } from "./utils/getLocationsbyUser";
+import {
+  getByUserLocation,
+  combineDetailsbyLocations,
+} from "./utils/getLocationsbyUser";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -23,6 +26,7 @@ export default function App() {
   const [dropDownList, setDropDownList] = useState({});
   // eslint-disable-next-line
   const [allLocations, setAllLocations] = useState([]);
+  const [locationDetails, setLocationDetails] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -31,6 +35,7 @@ export default function App() {
     getTotalLocations();
     getDropdownList();
     pitzByUserLocation();
+    makeLocationDetails();
   }, []);
 
   useEffect(() => {
@@ -48,8 +53,14 @@ export default function App() {
   };
 
   const getTotalLocations = async () => {
-    const locations = await getAllLocations();
-    setAllLocations(locations.data);
+    const locs = await getAllLocations();
+    setAllLocations(locs.data);
+  };
+
+  const makeLocationDetails = async () => {
+    const locations = await combineDetailsbyLocations();
+    setLocationDetails(locations);
+    // console.log(allLocations);
   };
 
   const pitzByUserLocation = async (e) => {
@@ -58,8 +69,8 @@ export default function App() {
     // const locations = getByUserLocation(e.city, e.state);
     //***MUST CONNECT TO USER INPUT FROM HAMBURGER MENU****
     const params = {
-      state: e || "CA",
-      city: e, //|| "Amarillo",
+      state: e || "TX",
+      city: e || "Amarillo",
     };
 
     console.log(params);
@@ -88,6 +99,7 @@ export default function App() {
           id="map"
           allLocations={allLocations}
           selectedLocations={selectedLocations}
+          locationDetails={locationDetails}
         />
       ) : null}
       {/* <SearchForm
