@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import logo from "./logo.svg";
 import "./App.css";
 import Map from "./components/Map";
 import Header from "./components/Header";
@@ -75,11 +74,7 @@ export default function App() {
   //RENDER
   return (
     <div className="App" style={{ height: "100%" }}>
-      {/* <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to ServiceFINDER</h2>
-      </div> */}
-      <Header id="custom-header" />
+      <Header />
       {isLoaded ? <Map id="map" allLocations={allLocations} /> : null}
       {/* <SearchForm
         id="searchform"
