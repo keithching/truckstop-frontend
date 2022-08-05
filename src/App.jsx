@@ -6,6 +6,7 @@ import "./App.css";
 import Map from "./components/Map";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
+import Footer from "./components/Footer";
 
 export default function App() {
   //STATE
@@ -74,10 +75,10 @@ export default function App() {
   //RENDER
   return (
     <div className="App" style={{ height: "100%" }}>
-      <div className="App-header">
+      {/* <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Welcome to ServiceFINDER</h2>
-      </div>
+      </div> */}
       <Header id="custom-header" />
       {isLoaded ? <Map id="map" allLocations={allLocations} /> : null}
       {/* <SearchForm
@@ -88,6 +89,7 @@ export default function App() {
         setSearchResult={setSearchResult}
         // test={test}
       /> */}
+      <Footer />
     </div>
   );
 }

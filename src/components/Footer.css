@@ -1,0 +1,13 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.searchForm {
+  grid-row: 1 / -1;
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
