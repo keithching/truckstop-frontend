@@ -16,8 +16,32 @@ const getLocations = (queryParams) => {
   }
 };
 
+const getTruckServices = () => {
+  return axios.get(`${server}truck-services`);
+};
+
+const getRestaurants = () => {
+  return axios.get(`${server}restaurants`);
+};
+
+const getAmenities = () => {
+  return axios.get(`${server}amentities`);
+};
+
+const getGasPrices = () => {
+  return axios.get(`${server}gas-prices`);
+};
+
 const getSearchItems = () => {
   return axios.get(`${server}searchItems`);
 };
 
-export { getAllLocations, getSearchItems, getLocations };
+export {
+  getAllLocations,
+  getLocations,
+  getSearchItems,
+  getTruckServices,
+  getRestaurants,
+  getAmenities,
+  getGasPrices,
+};
