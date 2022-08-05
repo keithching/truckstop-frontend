@@ -8,7 +8,9 @@ const getByUserLocation = async (city, state) => {
     params.state = state;
     return getLocations(params);
   }
-  return getAllLocations();
+  //return getAllLocations();
 };
+
+//const getByServiceLocation
 
 export { getByUserLocation };

@@ -1,8 +1,9 @@
 import React from "react";
 
-import { restaurants, services, amenities } from "../testDB.json";
+//import { restaurants, services, amenities } from "../testDB.json";
 
 export default function SearchForm(props) {
+  const { truckServices, restaurants, amenities } = props.dropDownList;
   //RENDER
   return (
     <>
@@ -19,8 +20,8 @@ export default function SearchForm(props) {
           <option key={"ServiceDefault"} value="0">
             --Choose an option--
           </option>
-          {services.map((service) => (
-            <option key={services.indexOf(service)} value={service}>
+          {truckServices.map((service) => (
+            <option key={truckServices.indexOf(service)} value={service}>
               {service}
             </option>
           ))}

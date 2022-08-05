@@ -1,70 +1,74 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+//import axios from "axios";
 
 import logo from "./logo.svg";
 import "./App.css";
 import Map from "./components/Map";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
+import { getAllLocations, getSearchItems } from "./utils/dataFromServer";
+import { getByUserLocation } from "./utils/getLocationsbyUser";
 
 export default function App() {
   //STATE
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [truckService, setTruckService] = useState("");
   const [amenity, setAmenity] = useState("");
+  const [gasPrices, getGasPrices] = useState([]);
   // eslint-disable-next-line
   const [searchResult, setSearchResult] = useState();
   // eslint-disable-next-line
   const [dropDownList, setDropDownList] = useState({});
   // eslint-disable-next-line
   const [allLocations, setAllLocations] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // EFFECT
   useEffect(() => {
-    getAllLocations();
-    //getDropdownList();
+    getTotalLocations();
+    getDropdownList();
+    pitzByUserLocation();
   }, []);
 
   useEffect(() => {
     setIsLoaded(true);
   }, [allLocations]);
 
+  useEffect(() => {
+    if (selectedLocations) console.log(selectedLocations);
+  }, [selectedLocations]);
+
   // HANDLER
   const getDropdownList = async () => {
-    const returnObj = {};
-    await axios
-      .get("https://truck-stop-test.herokuapp.com/api/truck-services")
-      .then((response) => {
-        // console.log(response);
-        // return response;
-        returnObj.truckServices = response;
-      });
-    const restaurants = await axios
-      .get("https://truck-stop-test.herokuapp.com/api/restaurants")
-      .then((response) => {
-        console.log(response);
-        return response;
-      });
-    await axios
-      .get("https://truck-stop-test.herokuapp.com/api/amenities")
-      .then((response) => {
-        console.log(response);
-        return response;
-      });
+    const lists = await getSearchItems();
+    setDropDownList(lists.data);
   };
 
-  const getAllLocations = async () => {
-    await axios
-      .get("https://truck-stop-test.herokuapp.com/api/locations")
-      .then((response) => {
-        console.log(response);
-        setAllLocations(response);
-      });
+  const getTotalLocations = async () => {
+    const locations = await getAllLocations();
+    setAllLocations(locations.data);
   };
+
+  const pitzByUserLocation = async (e) => {
+    //e.preventDefault();
+    //console.log(`UserLocations: ${e}`);
+    // const locations = getByUserLocation(e.city, e.state);
+    //***MUST CONNECT TO USER INPUT FROM HAMBURGER MENU****
+    const state = e || "TX";
+    const city = e || "Amarillo";
+
+    const locations = await getByUserLocation(city, state);
+    setSelectedLocations(locations.data);
+  };
+
+  const pitzBySearch = async (e) => {};
 
   const test = (e) => {
     e.preventDefault();
+    ////call search list
     console.log("here");
     console.log(`restaurant: ${restaurant}`);
     console.log(`truckService: ${truckService}`);
@@ -76,17 +80,24 @@ export default function App() {
     <div className="App" style={{ height: "100%" }}>
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to ServiceFINDER</h2>
+        <h2>Welcome to PitStopz</h2>
       </div>
       <Header id="custom-header" />
-      {isLoaded ? <Map id="map" allLocations={allLocations} /> : null}
+      {isLoaded ? (
+        <Map
+          id="map"
+          allLocations={allLocations}
+          selectedLocations={selectedLocations}
+        />
+      ) : null}
       {/* <SearchForm
         id="searchform"
+        dropDownList={dropDownList}
         setRestaurant={setRestaurant}
         setTruckService={setTruckService}
         setAmenity={setAmenity}
         setSearchResult={setSearchResult}
-        // test={test}
+        test={test}
       /> */}
     </div>
   );

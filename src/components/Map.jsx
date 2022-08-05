@@ -22,10 +22,13 @@ export default function Map(props) {
 
   const markers = [];
 
-  if (!props.allLocations.data) {
+  if (!props.allLocations) {
     return <></>;
   }
-  const location = props.allLocations.data;
+
+  const location = props.selectedLocations
+    ? props.selectedLocations
+    : props.allLocations;
 
   for (let i = 0; i < location.length; i++) {
     markers.push({
