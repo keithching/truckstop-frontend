@@ -1,28 +1,73 @@
 import React from "react";
 import "./Footer.css";
 
-const SearchDropdownList = () => {
+// a class for creating dropdown list object
+class dropdownList {
+  constructor(type, array) {
+    this.type = type;
+    this.array = array;
+  }
+}
+
+const SearchDropdownList = (props) => {
+  const { data } = props;
+
   return (
     <div>
-      <select name="" id="">
-        <option value="123">ABC</option>
-        <option value="456">DEF</option>
-        <option value="789">GHI</option>
+      <select
+        name={data ? data.type : ""}
+        id={data.type}
+        className="select-dropdown"
+        defaultValue="default"
+      >
+        {data ? (
+          <option value="default"> -- select {data.type} -- </option>
+        ) : null}
+        {data
+          ? data.array.map((item) => {
+              return (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              );
+            })
+          : null}
       </select>
     </div>
   );
 };
 
 const SearchButton = () => {
-  return <button type="submit">search</button>;
+  return (
+    <button type="submit" className="dropdown-search-btn">
+      🔍
+    </button>
+  );
 };
 
 const SearchForm = ({ className }) => {
+  // TODO: pull from states, or fetch call from API
+  const amenities = new dropdownList("amenity", ["1", "2"]);
+  const restaurants = new dropdownList("restaurant", ["3", "4"]);
+  const truckServices = new dropdownList("truckService", ["5", "6"]);
+
+  const handleFormSubmission = (e) => {
+    e.preventDefault();
+    // may revisit document.getElementById used in a React setting
+    const amenityInput = document.getElementById(`amenity`).value;
+    const restaurantInput = document.getElementById(`restaurant`).value;
+    const truckServiceInput = document.getElementById(`truckService`).value;
+    console.log(amenityInput);
+    console.log(restaurantInput);
+    console.log(truckServiceInput);
+    // TODO: set states here
+  };
+
   return (
-    <form action="" className={className}>
-      <SearchDropdownList />
-      <SearchDropdownList />
-      <SearchDropdownList />
+    <form action="" className={className} onSubmit={handleFormSubmission}>
+      <SearchDropdownList data={amenities} />
+      <SearchDropdownList data={restaurants} />
+      <SearchDropdownList data={truckServices} />
       <SearchButton />
     </form>
   );
