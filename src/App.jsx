@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import { getAllLocations, getSearchItems } from "./utils/dataFromServer";
 import { getByUserLocation } from "./utils/getLocationsbyUser";
+import Footer from "./components/Footer";
 
 export default function App() {
   //STATE
@@ -81,7 +82,7 @@ export default function App() {
   //RENDER
   return (
     <div className="App" style={{ height: "100%" }}>
-      <Header id="custom-header" />
+      <Header />
       {isLoaded ? (
         <Map
           id="map"
@@ -98,6 +99,7 @@ export default function App() {
         setSearchResult={setSearchResult}
         test={test}
       /> */}
+      <Footer />
     </div>
   );
 }

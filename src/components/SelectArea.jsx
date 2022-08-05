@@ -8,7 +8,7 @@ export default function SelectArea() {
 
   // handlerfunction for swiching button to state and city
   return (
-    <nav className={"nav"}>
+    <nav>
       <div className={"select-form"}>
         <form action="">
           <select name="state" id="state"></select>
