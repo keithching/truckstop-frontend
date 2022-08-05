@@ -25,5 +25,13 @@ body {
 
 .hamburger {
   position: absolute;
-  right: 3%;
+  left: 3%;
+}
+
+.selectArea.show {
+  display: none;
+}
+
+.selectArea.hide {
+  display: block;
 }
