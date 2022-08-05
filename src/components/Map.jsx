@@ -26,9 +26,13 @@ export default function Map(props) {
     return <></>;
   }
 
-  const location = props.selectedLocations
-    ? props.selectedLocations
-    : props.allLocations;
+  //console.log(props);
+  const location =
+    props.selectedLocations.length < 1
+      ? props.allLocations
+      : props.selectedLocations;
+
+  //console.log(location);
 
   for (let i = 0; i < location.length; i++) {
     markers.push({
