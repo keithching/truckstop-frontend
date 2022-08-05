@@ -1,6 +1,11 @@
 .footer {
   position: absolute;
   bottom: 0;
+  padding: 10px;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchForm {
@@ -10,4 +15,24 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.select-dropdown {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.dropdown-search-btn {
+  border-style: none;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.dropdown-search-btn:hover {
+  transform: scale(1.05);
+  background-color: rgb(255, 222, 227);
 }
