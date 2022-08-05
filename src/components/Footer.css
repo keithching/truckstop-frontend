@@ -1,11 +1,16 @@
-.footer {
+.footer-container {
   position: absolute;
   bottom: 0;
-  padding: 10px;
   display: flex;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.footer {
+  padding: 10px;
+  display: flex;
+  gap: 20px;
 }
 
 .searchForm {
@@ -18,15 +23,18 @@
 }
 
 .select-dropdown {
-  border-radius: 10px;
-  padding: 10px;
+  border-style: none;
+  border-radius: 15px;
+  padding: 8px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
 }
 
-.dropdown-search-btn {
+.dropdown-search-btn,
+.user-setting-btn {
   border-style: none;
   font-size: 30px;
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.1s;
@@ -35,4 +43,15 @@
 .dropdown-search-btn:hover {
   transform: scale(1.05);
   background-color: rgb(255, 222, 227);
+}
+
+.user-setting-btn:hover {
+  transform: scale(1.05);
+  background-color: rgb(222, 240, 255);
+}
+
+@media screen and (min-width: 750px) and (max-width: 1000px) {
+  .footer {
+    overflow: scroll;
+  }
 }

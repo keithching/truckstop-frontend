@@ -57,9 +57,6 @@ const SearchForm = ({ className }) => {
     const amenityInput = document.getElementById(`amenity`).value;
     const restaurantInput = document.getElementById(`restaurant`).value;
     const truckServiceInput = document.getElementById(`truckService`).value;
-    console.log(amenityInput);
-    console.log(restaurantInput);
-    console.log(truckServiceInput);
     // TODO: set states here
   };
 
@@ -73,10 +70,25 @@ const SearchForm = ({ className }) => {
   );
 };
 
-const Footer = () => {
+const UserSettingButton = ({ setShowModal }) => {
+  const handleClick = () => {
+    setShowModal((prev) => !prev);
+  };
+
   return (
-    <div className="footer">
-      <SearchForm className="searchForm" />
+    <button type="submit" className="user-setting-btn" onClick={handleClick}>
+      ⚙
+    </button>
+  );
+};
+
+const Footer = ({ setShowModal }) => {
+  return (
+    <div className="footer-container">
+      <div className="footer">
+        <UserSettingButton setShowModal={setShowModal} />
+        <SearchForm className="searchForm" />
+      </div>
     </div>
   );
 };

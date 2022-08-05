@@ -6,6 +6,7 @@ import Map from "./components/Map";
 import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import Footer from "./components/Footer";
+import Modal from "./components/Modal";
 
 export default function App() {
   //STATE
@@ -19,6 +20,9 @@ export default function App() {
   // eslint-disable-next-line
   const [allLocations, setAllLocations] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Modal
+  const [showModal, setShowModal] = useState(false);
 
   // EFFECT
   useEffect(() => {
@@ -84,7 +88,8 @@ export default function App() {
         setSearchResult={setSearchResult}
         // test={test}
       /> */}
-      <Footer />
+      <Footer setShowModal={setShowModal} />
+      {showModal ? <Modal setShowModal={setShowModal} /> : null}
     </div>
   );
 }
