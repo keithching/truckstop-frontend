@@ -12,6 +12,9 @@ const getLocations = (queryParams) => {
     if (queryParams.state && queryParams.city) {
       searchString = `?state=${queryParams.state}&city=${queryParams.city}`;
     }
+    if (!queryParams.city) {
+      searchString = `?state=${queryParams.state}`;
+    }
     return axios.get(`${server}locations${searchString}`);
   }
 };
