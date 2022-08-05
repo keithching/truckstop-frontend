@@ -57,9 +57,11 @@ export default function App() {
     // const locations = getByUserLocation(e.city, e.state);
     //***MUST CONNECT TO USER INPUT FROM HAMBURGER MENU****
     const params = {
-      state: e || "TX",
+      state: e || "CA",
       city: e, //|| "Amarillo",
     };
+
+    console.log(params);
 
     const locations = await getByUserLocation(params);
     setSelectedLocations(locations.data);

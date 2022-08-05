@@ -6,7 +6,7 @@ const getAllLocations = () => {
   return axios.get(`${server}locations`);
 };
 
-const getLocations = async (queryParams) => {
+const getLocations = (queryParams) => {
   let searchString;
   if (queryParams) {
     if (queryParams.state && queryParams.city) {
@@ -15,9 +15,7 @@ const getLocations = async (queryParams) => {
     if (!queryParams.city) {
       searchString = `?state=${queryParams.state}`;
     }
-    return axios.get(`${server}locations${searchString}`).then((res) => {
-      return res;
-    });
+    return axios.get(`${server}locations${searchString}`);
   }
 };
 

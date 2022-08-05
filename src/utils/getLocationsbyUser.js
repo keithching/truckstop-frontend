@@ -5,19 +5,8 @@ import {
   getTruckServices,
 } from "./dataFromServer";
 
-const getByUserLocation = async (input) => {
-  const params = {};
-  if (input.city && input.state) {
-    params.city = input.city;
-    params.state = input.state;
-    return getLocations(params);
-  }
-  if (input.state & !input.city) {
-    params.state = input.state;
-    const loc = await getLocations(params);
-    console.log(`loc${loc}`);
-    return loc;
-  }
+const getByUserLocation = (input) => {
+  return getLocations(input);
 };
 
 //const getByServiceLocation
