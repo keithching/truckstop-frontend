@@ -67,7 +67,6 @@ const SearchForm = ({
 
   useEffect(() => {
     if (Object.keys(dropDownList).length > 0) {
-      console.log(dropDownList);
       setAmenities(new dropdownList("amenity", [...dropDownList.amenities]));
       setRestaurants(
         new dropdownList("restaurant", [...dropDownList.restaurants])
