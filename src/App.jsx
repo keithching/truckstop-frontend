@@ -115,7 +115,7 @@ export default function App() {
         setSearchResult={setSearchResult}
         test={test}
       /> */}
-      <Footer setShowModal={setShowModal} />
+      <Footer setShowModal={setShowModal} dropDownList={dropDownList} />
       {showModal ? <Modal setShowModal={setShowModal} /> : null}
     </div>
   );

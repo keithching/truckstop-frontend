@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Footer.css";
 
 // a class for creating dropdown list object
@@ -12,27 +12,32 @@ class dropdownList {
 const SearchDropdownList = (props) => {
   const { data } = props;
 
+  console.log(data.type);
+
   return (
     <div>
-      <select
-        name={data ? data.type : ""}
-        id={data.type}
-        className="select-dropdown"
-        defaultValue="default"
-      >
-        {data ? (
-          <option value="default"> -- select {data.type} -- </option>
-        ) : null}
-        {data
-          ? data.array.map((item) => {
-              return (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              );
-            })
-          : null}
-      </select>
+      {data ? (
+        <select
+          name={data ? data.type : ""}
+          id={data.type}
+          className="select-dropdown"
+          defaultValue="default"
+        >
+          {data.type ? (
+            <option value="default"> -- select {data.type} -- </option>
+          ) : null}
+          {data.type
+            ? data.array.map((item) => {
+                return (
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                );
+              })
+            : null}
+        </select>
+      ) : null}
+      {/* {JSON.stringify(data.type)} */}
     </div>
   );
 };
@@ -45,11 +50,31 @@ const SearchButton = () => {
   );
 };
 
-const SearchForm = ({ className }) => {
+const SearchForm = ({ className, dropDownList }) => {
   // TODO: pull from states, or fetch call from API
-  const amenities = new dropdownList("amenity", ["1", "2"]);
-  const restaurants = new dropdownList("restaurant", ["3", "4"]);
-  const truckServices = new dropdownList("truckService", ["5", "6"]);
+  const [amenities, setAmenities] = useState({});
+  const [restaurants, setRestaurants] = useState({});
+  const [truckServices, setTruckServices] = useState({});
+  const [isFetched, setIsFetched] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(dropDownList).length > 0) {
+      console.log(dropDownList);
+      setAmenities(new dropdownList("amenity", [...dropDownList.amenities]));
+      setRestaurants(
+        new dropdownList("restaurant", [...dropDownList.restaurants])
+      );
+      setTruckServices(
+        new dropdownList("truckService", [...dropDownList.truckServices])
+      );
+    }
+  }, [dropDownList]);
+
+  useEffect(() => {
+    if (amenities && restaurants && truckServices) {
+      setIsFetched(true);
+    }
+  }, [amenities, restaurants, truckServices]);
 
   const handleFormSubmission = (e) => {
     e.preventDefault();
@@ -62,10 +87,14 @@ const SearchForm = ({ className }) => {
 
   return (
     <form action="" className={className} onSubmit={handleFormSubmission}>
-      <SearchDropdownList data={amenities} />
-      <SearchDropdownList data={restaurants} />
-      <SearchDropdownList data={truckServices} />
-      <SearchButton />
+      {isFetched ? (
+        <>
+          <SearchDropdownList data={amenities} />
+          <SearchDropdownList data={restaurants} />
+          <SearchDropdownList data={truckServices} />
+          <SearchButton />
+        </>
+      ) : null}
     </form>
   );
 };
@@ -82,12 +111,12 @@ const UserSettingButton = ({ setShowModal }) => {
   );
 };
 
-const Footer = ({ setShowModal }) => {
+const Footer = ({ setShowModal, dropDownList }) => {
   return (
     <div className="footer-container">
       <div className="footer">
         <UserSettingButton setShowModal={setShowModal} />
-        <SearchForm className="searchForm" />
+        <SearchForm className="searchForm" dropDownList={dropDownList} />
       </div>
     </div>
   );
