@@ -24,17 +24,19 @@
 
 .select-dropdown {
   border-style: none;
-  border-radius: 15px;
-  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 5%;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-search-btn,
 .user-setting-btn {
   border-style: none;
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
+  font-size: 1rem;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.1s;

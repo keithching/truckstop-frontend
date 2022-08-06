@@ -56,6 +56,14 @@ export default function App() {
     if (state) console.log(`THE USER INPUT in STATE FOR LOCATION ${state}`);
   }, [state]);
 
+  useEffect(() => {
+    if (amenity && restaurant && truckService) {
+      console.log(amenity);
+      console.log(restaurant);
+      console.log(truckService);
+    }
+  }, [amenity, restaurant, truckService]);
+
   // HANDLER
   const getDropdownList = async () => {
     const lists = await getSearchItems();
@@ -108,6 +116,9 @@ export default function App() {
           allLocations={allLocations}
           selectedLocations={selectedLocations}
           locationDetails={locationDetails}
+          restaurant={restaurant}
+          amenity={amenity}
+          truckService={truckService}
         />
       ) : null}
       {/* <SearchForm
@@ -119,7 +130,13 @@ export default function App() {
         setSearchResult={setSearchResult}
         test={test}
       /> */}
-      <Footer setShowModal={setShowModal} />
+      <Footer
+        setShowModal={setShowModal}
+        dropDownList={dropDownList}
+        setAmenity={setAmenity}
+        setRestaurant={setRestaurant}
+        setTruckService={setTruckService}
+      />
       {showModal ? (
         <Modal setShowModal={setShowModal} setState={setState} />
       ) : null}

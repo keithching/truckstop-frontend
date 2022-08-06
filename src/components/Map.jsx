@@ -9,7 +9,13 @@ require("dotenv").config();
 
 export default function Map(props) {
   const [activeMarker, setActiveMarker] = useState(null);
-  const { locationDetails, selectedLocations } = props;
+  const {
+    locationDetails,
+    selectedLocations,
+    amenity,
+    restaurant,
+    truckService,
+  } = props;
   const [markers, setMarkers] = useState([]);
   const [location, setLocation] = useState([]);
 
@@ -26,7 +32,7 @@ export default function Map(props) {
 
   useEffect(() => {
     if (locationDetails.length > 0 && location.length > 0) {
-      console.log(`MAPPP LOOCALLL ___ ${location}`);
+      // console.log(`MAPPP LOOCALLL ___ ${location}`);
       const temp = [];
 
       for (let i = 0; i < location.length; i++) {
@@ -36,7 +42,7 @@ export default function Map(props) {
         //console.log(
         //   `🥲🥲🥲🥲🥲🥲🥲🥲 ${JSON.stringify(services[0].gas_prices)}`
         // );
-        console.log(`🚛 SERVICES ${services[0]}`);
+        // console.log(`🚛 SERVICES ${services[0]}`);
 
         temp.push({
           id: location[i].site_id,
@@ -50,10 +56,38 @@ export default function Map(props) {
           amenities: services[0].amenities,
         });
         console.log({ temp });
+      }
+
+      // fitler by the selected items
+      console.log("❤️");
+      if (restaurant || amenity || truckService) {
+        const filteredTemp = temp.filter((el) => {
+          return (
+            (restaurant === "default"
+              ? true
+              : el.restaurants.includes(restaurant)) &&
+            (amenity === "default" ? true : el.amenities.includes(amenity)) &&
+            (truckService === "default"
+              ? true
+              : el.services.includes(truckService))
+          );
+        });
+        setMarkers(filteredTemp);
+      } else {
         setMarkers(temp);
       }
+
+      // if (filteredTemp.length > 0) {
+      //   // selected
+      //   console.log(filteredTemp);
+      //   setMarkers(filteredTemp);
+      // } else {
+      //   // deafult
+      //   console.log("d", temp);
+      //   setMarkers(temp);
+      // }
     }
-  }, [locationDetails, location]);
+  }, [locationDetails, location, amenity, restaurant, truckService]);
 
   const handleActiveMarker = (id) => {
     if (id === activeMarker) {
