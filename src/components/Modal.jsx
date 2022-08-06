@@ -3,19 +3,15 @@ import "./Modal.css";
 
 const Modal = ({ setShowModal, setState }) => {
   const handleClick = () => {
-    console.log("hi");
     setShowModal((prev) => !prev);
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("update clicked");
-    // const updateBtn = document.getElementById("updateBtn");
     const radioBtns = document.querySelectorAll('input[name="state"]');
     for (const radioBtn of radioBtns) {
       if (radioBtn.checked) {
         setState(radioBtn.value);
-        console.log(`${radioBtn.value} checked`);
         break;
       }
     }
@@ -27,7 +23,6 @@ const Modal = ({ setShowModal, setState }) => {
       <div className="modal-content">
         <div className="modal-header">
           <div></div>
-          {/* <div className="header-text">User Setting</div> */}
           <button onClick={handleClick}>close</button>
         </div>
         <div className="modal-main">

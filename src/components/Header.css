@@ -5,23 +5,8 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  /* background-color: rgba(240, 248, 255, 0.5); */
   color: white;
 }
-
-/* .title {
-  grid-column: 1 / 2;
-  grid-row: 1 / -1;
-  font-size: 30px;
-}
-
-.hamburger {
-  grid-row: 1 / -1;
-  grid-column: 2 / -1;
-  font-size: 50px;
-* {
-  box-sizing: border-box;
-} */
 
 .wrapper-container {
   display: flex;
@@ -29,12 +14,9 @@
   justify-content: center;
   margin: 0 0 2% 0;
   height: 2rem;
-  /* box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4); */
 }
 
 .Header {
-  /* grid-column: 1 / 2;
-    grid-row: 1 / -1; */
   font-size: 1.5rem;
   color: white;
   align-items: center;

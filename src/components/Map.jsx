@@ -11,6 +11,7 @@ export default function Map(props) {
   const [activeMarker, setActiveMarker] = useState(null);
   const {
     locationDetails,
+    allLocations,
     selectedLocations,
     amenity,
     restaurant,
@@ -20,11 +21,10 @@ export default function Map(props) {
   const [location, setLocation] = useState([]);
 
   useEffect(() => {
-    setLocation(props.allLocations);
-  }, [props.allLocations]);
+    setLocation(allLocations);
+  }, [allLocations]);
 
   useEffect(() => {
-    // console.log(`🗾🗾🗾🗾🗾🗾${locationDetails}`);
     if (selectedLocations) {
       setLocation(selectedLocations);
     }
@@ -32,17 +32,12 @@ export default function Map(props) {
 
   useEffect(() => {
     if (locationDetails.length > 0 && location.length > 0) {
-      // console.log(`MAPPP LOOCALLL ___ ${location}`);
       const temp = [];
 
       for (let i = 0; i < location.length; i++) {
         const services = locationDetails.filter((loc) => {
           return loc.site_id === location[i].site_id;
         });
-        //console.log(
-        //   `🥲🥲🥲🥲🥲🥲🥲🥲 ${JSON.stringify(services[0].gas_prices)}`
-        // );
-        // console.log(`🚛 SERVICES ${services[0]}`);
 
         temp.push({
           id: location[i].site_id,
@@ -55,11 +50,9 @@ export default function Map(props) {
           gasPrices: services[0].gas_prices,
           amenities: services[0].amenities,
         });
-        console.log({ temp });
       }
 
       // fitler by the selected items
-      console.log("❤️");
       if (restaurant || amenity || truckService) {
         const filteredTemp = temp.filter((el) => {
           return (
@@ -76,16 +69,6 @@ export default function Map(props) {
       } else {
         setMarkers(temp);
       }
-
-      // if (filteredTemp.length > 0) {
-      //   // selected
-      //   console.log(filteredTemp);
-      //   setMarkers(filteredTemp);
-      // } else {
-      //   // deafult
-      //   console.log("d", temp);
-      //   setMarkers(temp);
-      // }
     }
   }, [locationDetails, location, amenity, restaurant, truckService]);
 
@@ -100,7 +83,7 @@ export default function Map(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_KEY,
   });
 
-  if (!props.allLocations) {
+  if (!allLocations) {
     return <></>;
   }
 
@@ -140,9 +123,6 @@ export default function Map(props) {
                       <div id="w_services">Service: {services}</div>
                       <div id="w_amenities">Amenities: {amenities}</div>
                       <div id="w_restaurants">Restaurants: {restaurants}</div>
-                      {/* <div id="w_gasPrices">
-                        Gas Prices: {JSON.stringify(gasPrices)}
-                      </div> */}
                       <div>
                         Gas Prices:
                         {Object.keys(gasPrices).length > 0 ? (

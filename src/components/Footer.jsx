@@ -41,7 +41,6 @@ const SearchDropdownList = (props) => {
             : null}
         </select>
       ) : null}
-      {/* {JSON.stringify(data.type)} */}
     </div>
   );
 };
@@ -61,14 +60,10 @@ const SearchForm = ({
   setRestaurant,
   setTruckService,
 }) => {
-  // TODO: pull from states, or fetch call from API
-  // const amenities = new dropdownList("amenity", ["1", "2"]);
-  // const restaurants = new dropdownList("restaurant", ["3", "4"]);
-  // const truckServices = new dropdownList("truckService", ["5", "6"]);
   const [amenities, setAmenities] = useState({});
   const [restaurants, setRestaurants] = useState({});
   const [truckServices, setTruckServices] = useState({});
-  const [isFetched, setIsFetched] = useState(false);
+  // const [isFetched, setIsFetched] = useState(false);
 
   useEffect(() => {
     if (Object.keys(dropDownList).length > 0) {
@@ -89,7 +84,7 @@ const SearchForm = ({
     const amenityInput = document.getElementById(`amenity`).value;
     const restaurantInput = document.getElementById(`restaurant`).value;
     const truckServiceInput = document.getElementById(`truckService`).value;
-    // TODO: set states here
+
     setAmenity(amenityInput);
     setRestaurant(restaurantInput);
     setTruckService(truckServiceInput);

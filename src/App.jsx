@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from "react";
-//import axios from "axios";
 
-import "./App.css";
-import Map from "./components/Map";
-import Header from "./components/Header";
-import SearchForm from "./components/SearchForm";
 import { getAllLocations, getSearchItems } from "./utils/dataFromServer";
 import {
   getByUserLocation,
   combineDetailsbyLocations,
 } from "./utils/getLocationsbyUser";
+import Map from "./components/Map";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Modal from "./components/Modal";
+import "./App.css";
 
 export default function App() {
   //STATE
   const [state, setState] = useState("");
-  const [city, setCity] = useState("");
+  // const [city, setCity] = useState("");
   const [restaurant, setRestaurant] = useState("");
   const [truckService, setTruckService] = useState("");
   const [amenity, setAmenity] = useState("");
-  const [gasPrices, getGasPrices] = useState([]);
-  // eslint-disable-next-line
-  const [searchResult, setSearchResult] = useState();
-  // eslint-disable-next-line
+  // const [gasPrices, getGasPrices] = useState([]);
+  // const [searchResult, setSearchResult] = useState();
   const [dropDownList, setDropDownList] = useState({});
-  // eslint-disable-next-line
   const [allLocations, setAllLocations] = useState([]);
   const [locationDetails, setLocationDetails] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
@@ -47,22 +42,8 @@ export default function App() {
   }, [allLocations]);
 
   useEffect(() => {
-    if (selectedLocations)
-      console.log(`SELECTED LOCATIONS ___${JSON.stringify(selectedLocations)}`);
-  }, [selectedLocations]);
-
-  useEffect(() => {
     if (state) pitzByUserLocation(state);
-    if (state) console.log(`THE USER INPUT in STATE FOR LOCATION ${state}`);
   }, [state]);
-
-  useEffect(() => {
-    if (amenity && restaurant && truckService) {
-      console.log(amenity);
-      console.log(restaurant);
-      console.log(truckService);
-    }
-  }, [amenity, restaurant, truckService]);
 
   // HANDLER
   const getDropdownList = async () => {
@@ -78,32 +59,15 @@ export default function App() {
   const makeLocationDetails = async () => {
     const locations = await combineDetailsbyLocations();
     setLocationDetails(locations);
-    // console.log(allLocations);
   };
 
   const pitzByUserLocation = async (state) => {
-    console.log("state in pitzbyuserlocation: ", state);
     const params = {
       state: state || "",
       city: "",
     };
-
-    //console.log(params);
-
     const locations = await getByUserLocation(params);
-    console.log("XXXXXXXX locations: ", locations.data);
     setSelectedLocations(locations.data);
-  };
-
-  const pitzBySearch = async (e) => {};
-
-  const test = (e) => {
-    e.preventDefault();
-    ////call search list
-    console.log("here");
-    console.log(`restaurant: ${restaurant}`);
-    console.log(`truckService: ${truckService}`);
-    console.log(`amenity: ${amenity}`);
   };
 
   //RENDER
@@ -121,15 +85,6 @@ export default function App() {
           truckService={truckService}
         />
       ) : null}
-      {/* <SearchForm
-        id="searchform"
-        dropDownList={dropDownList}
-        setRestaurant={setRestaurant}
-        setTruckService={setTruckService}
-        setAmenity={setAmenity}
-        setSearchResult={setSearchResult}
-        test={test}
-      /> */}
       <Footer
         setShowModal={setShowModal}
         dropDownList={dropDownList}
