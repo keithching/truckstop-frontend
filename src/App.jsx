@@ -47,8 +47,14 @@ export default function App() {
   }, [allLocations]);
 
   useEffect(() => {
-    if (selectedLocations) console.log(selectedLocations);
+    if (selectedLocations)
+      console.log(`SELECTED LOCATIONS ___${JSON.stringify(selectedLocations)}`);
   }, [selectedLocations]);
+
+  useEffect(() => {
+    if (state) pitzByUserLocation(state);
+    if (state) console.log(`THE USER INPUT in STATE FOR LOCATION ${state}`);
+  }, [state]);
 
   // HANDLER
   const getDropdownList = async () => {
@@ -67,19 +73,17 @@ export default function App() {
     // console.log(allLocations);
   };
 
-  const pitzByUserLocation = async (e) => {
-    //e.preventDefault();
-    //console.log(`UserLocations: ${e}`);
-    // const locations = getByUserLocation(e.city, e.state);
-    //***MUST CONNECT TO USER INPUT FROM HAMBURGER MENU****
+  const pitzByUserLocation = async (state) => {
+    console.log("state in pitzbyuserlocation: ", state);
     const params = {
-      state: e || "TX",
-      city: e || "Amarillo",
+      state: state || "",
+      city: "",
     };
 
-    console.log(params);
+    //console.log(params);
 
     const locations = await getByUserLocation(params);
+    console.log("XXXXXXXX locations: ", locations.data);
     setSelectedLocations(locations.data);
   };
 
@@ -116,7 +120,9 @@ export default function App() {
         test={test}
       /> */}
       <Footer setShowModal={setShowModal} />
-      {showModal ? <Modal setShowModal={setShowModal} /> : null}
+      {showModal ? (
+        <Modal setShowModal={setShowModal} setState={setState} />
+      ) : null}
     </div>
   );
 }

@@ -82,11 +82,11 @@ const UserSettingButton = ({ setShowModal }) => {
   );
 };
 
-const Footer = ({ setShowModal }) => {
+const Footer = ({ setShowModal, setState }) => {
   return (
     <div className="footer-container">
       <div className="footer">
-        <UserSettingButton setShowModal={setShowModal} />
+        <UserSettingButton setShowModal={setShowModal} setState={setState} />
         <SearchForm className="searchForm" />
       </div>
     </div>
