@@ -1,22 +1,25 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({ setShowModal }) => {
+const Modal = ({ setShowModal, setState }) => {
   const handleClick = () => {
     console.log("hi");
     setShowModal((prev) => !prev);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (e) => {
+    e.preventDefault();
     console.log("update clicked");
     // const updateBtn = document.getElementById("updateBtn");
     const radioBtns = document.querySelectorAll('input[name="state"]');
     for (const radioBtn of radioBtns) {
       if (radioBtn.checked) {
+        setState(radioBtn.value);
         console.log(`${radioBtn.value} checked`);
         break;
       }
     }
+    setShowModal((prev) => !prev);
   };
 
   return (
@@ -80,7 +83,7 @@ const Modal = ({ setShowModal }) => {
             <label htmlFor="KY">Kentucky</label>
 
             <input type="radio" name="state" id="LA" value="LA" />
-            <label htmlFor="LA">Los Angeles</label>
+            <label htmlFor="LA">Louisiana</label>
 
             <input type="radio" name="state" id="MD" value="MD" />
             <label htmlFor="MD">Maryland</label>
@@ -182,8 +185,6 @@ const Modal = ({ setShowModal }) => {
             <label htmlFor="WY">Wyoming</label>
 
             <br />
-
-            {/* <input type="text" placeholder="state" id="stateInput" /> */}
 
             <button onClick={handleUpdate} type="submit" id="updateBtn">
               Update

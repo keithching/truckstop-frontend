@@ -9,33 +9,34 @@ require("dotenv").config();
 
 export default function Map(props) {
   const [activeMarker, setActiveMarker] = useState(null);
-  const { locationDetails } = props;
+  const { locationDetails, selectedLocations } = props;
   const [markers, setMarkers] = useState([]);
+  const [location, setLocation] = useState([]);
 
   useEffect(() => {
-    if (locationDetails) {
-      // console.log(`🗾🗾🗾🗾🗾🗾${locationDetails}`);
-      if (!props.allLocations) {
-        return <></>;
-      }
+    setLocation(props.allLocations);
+  }, [props.allLocations]);
 
-      //console.log(props);
-      const location =
-        props.selectedLocations.length < 1
-          ? props.allLocations
-          : props.selectedLocations;
+  useEffect(() => {
+    // console.log(`🗾🗾🗾🗾🗾🗾${locationDetails}`);
+    if (selectedLocations) {
+      setLocation(selectedLocations);
+    }
+  }, [selectedLocations]);
 
-      console.log(location);
+  useEffect(() => {
+    if (locationDetails.length > 0 && location.length > 0) {
+      console.log(`MAPPP LOOCALLL ___ ${location}`);
       const temp = [];
 
       for (let i = 0; i < location.length; i++) {
         const services = locationDetails.filter((loc) => {
           return loc.site_id === location[i].site_id;
         });
-        console.log(
-          `🥲🥲🥲🥲🥲🥲🥲🥲 ${JSON.stringify(services[0].gas_prices)}`
-        );
-        console.log(`🚛GAS SERVICES ${services[0].gasPrices}`);
+        //console.log(
+        //   `🥲🥲🥲🥲🥲🥲🥲🥲 ${JSON.stringify(services[0].gas_prices)}`
+        // );
+        console.log(`🚛 SERVICES ${services[0]}`);
 
         temp.push({
           id: location[i].site_id,
@@ -52,7 +53,7 @@ export default function Map(props) {
         setMarkers(temp);
       }
     }
-  }, [locationDetails]);
+  }, [locationDetails, location]);
 
   const handleActiveMarker = (id) => {
     if (id === activeMarker) {
