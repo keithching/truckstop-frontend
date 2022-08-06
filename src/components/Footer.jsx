@@ -50,7 +50,13 @@ const SearchButton = () => {
   );
 };
 
-const SearchForm = ({ className, dropDownList }) => {
+const SearchForm = ({
+  className,
+  dropDownList,
+  setAmenity,
+  setRestaurant,
+  setTruckService,
+}) => {
   // TODO: pull from states, or fetch call from API
   const [amenities, setAmenities] = useState({});
   const [restaurants, setRestaurants] = useState({});
@@ -83,6 +89,9 @@ const SearchForm = ({ className, dropDownList }) => {
     const restaurantInput = document.getElementById(`restaurant`).value;
     const truckServiceInput = document.getElementById(`truckService`).value;
     // TODO: set states here
+    setAmenity(amenityInput);
+    setRestaurant(restaurantInput);
+    setTruckService(truckServiceInput);
   };
 
   return (
@@ -111,12 +120,24 @@ const UserSettingButton = ({ setShowModal }) => {
   );
 };
 
-const Footer = ({ setShowModal, dropDownList }) => {
+const Footer = ({
+  setShowModal,
+  dropDownList,
+  setAmenity,
+  setRestaurant,
+  setTruckService,
+}) => {
   return (
     <div className="footer-container">
       <div className="footer">
         <UserSettingButton setShowModal={setShowModal} />
-        <SearchForm className="searchForm" dropDownList={dropDownList} />
+        <SearchForm
+          className="searchForm"
+          dropDownList={dropDownList}
+          setAmenity={setAmenity}
+          setRestaurant={setRestaurant}
+          setTruckService={setTruckService}
+        />
       </div>
     </div>
   );
